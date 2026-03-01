@@ -1,6 +1,25 @@
 # MeishiSanxiaoGame（项目骨架阶段）
 
-本仓库当前只完成 **Cocos Creator 3.8.2 项目骨架**，目标是让后续玩法开发可以在稳定结构上迭代。
+# 甜品美食三叠消消乐（Cocos Creator 3.8.2）
+
+这是一个针对 **Cocos Creator 3.8.2** 的三叠消除类小游戏项目骨架，主题为甜品美食 2D 风格，共 60 关，关卡型推进，并包含可持续游玩的上瘾循环机制。本仓库当前只完成 **Cocos Creator 3.8.2 项目骨架**，目标是让后续玩法开发可以在稳定结构上迭代。
+
+## 你可以直接得到什么
+- 一个可运行的基础玩法循环：点击牌面 -> 入槽 -> 三消 -> 胜负判定 -> 下一关/重开。
+- 60 关 JSON 配置（可调参）。
+- 一套“最少手工”的场景启动器 `QuickStartLauncher`。
+
+## 说明
+- `src/` 目录是仓库内参考实现；实际在 Cocos 里运行只依赖 `assets/`。
+
+## 协作模板（记忆容器）
+- `.github/pull_request_template.md`：PR 提交时强制检查长期记忆、回归与验收。
+- `.github/ISSUE_TEMPLATE/bug_report.md`：Bug 报告模板（含复现步骤、环境与回归项）。
+- `.github/ISSUE_TEMPLATE/feature_request.md`：需求模板（含验收标准与非目标）。
+
+## 开发复盘与标准化指南
+- `docs/standardized-dev-guide.md`：从 0 到当前可运行状态的最简 SOP、踩坑复盘与排障清单。
+
 
 ## 目录结构（最小可维护）
 
