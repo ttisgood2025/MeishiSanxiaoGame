@@ -93,6 +93,11 @@ README.md
    - 本仓库已补充 `project.json` 与 `settings/profiles` 最小工程标识，请确认使用 **Cocos Creator 3.8.2** 打开仓库根目录。
    - 若本地历史缓存导致导入校验失败：先在 Creator 新建一个 3.8.2 空项目，再用本仓库的 `assets/`、`settings/`、`profiles/`、`project.json` 覆盖后重开。
 
+5. **编辑器版本不存在**
+   - 若你本机其它 3.8.2 项目可正常导入，本项目仍报错，优先排查 **`project.json` 版本字段格式** 是否被识别。
+   - 本仓库已将 `project.json` 补齐为 `creator.version + version`（并保留 `engine`），请先拉取最新代码再导入。
+   - 若仍失败，可将 `project.json` 的 `creator.version` 与 `version` 临时改为你本机实际安装的小版本号后重试。
+
 ## 验收命令
 
 ```bash

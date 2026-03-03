@@ -31,6 +31,7 @@
 - **重开/下一关按钮不工作**：确认 `BootStatusView.init(eventBus)` 被调用。
 - **关卡资源异常**：检查 `assets/resources/levels/*.json`；异常时应自动使用 fallback。
 - **导入包含无效文件**：确认仓库根目录存在 `project.json` 且使用 3.8.2；若缓存异常，先建空项目再覆盖 `assets/settings/profiles/project.json`。
+- **编辑器版本不存在**：若同机其它 3.8.2 项目正常，优先检查本项目 `project.json` 的版本字段；当前已补齐 `creator.version + version`，必要时改为本机已安装的小版本号重试。
 
 ## 5. 验收命令
 
