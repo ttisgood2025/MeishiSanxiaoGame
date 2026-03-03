@@ -1,11 +1,14 @@
 import {
     _decorator,
+    Canvas,
     Color,
     Component,
     EventTarget,
     JsonAsset,
     Label,
     Node,
+    director,
+    find,
     resources,
     UITransform,
     Vec3,
@@ -56,6 +59,7 @@ export class QuickStartLauncher extends Component {
 
     protected start(): void {
         this.currentLevelPath = this.levelPath;
+        this.ensureCanvasRoot();
         this.ensureUiBridge();
         this.bindUiActions();
 
@@ -65,6 +69,29 @@ export class QuickStartLauncher extends Component {
         });
     }
 
+
+    private ensureCanvasRoot(): void {
+        if (this.node.getComponent(Canvas)) {
+            return;
+        }
+
+        const scene = director.getScene();
+        const canvasNode = find('Canvas', scene ?? undefined);
+        if (canvasNode) {
+            this.node.setParent(canvasNode);
+            console.warn('[QuickStartLauncher] 未挂到 Canvas，已自动迁移到 Canvas 节点。');
+            return;
+        }
+
+        const fallbackCanvas = new Node('Canvas');
+        fallbackCanvas.addComponent(Canvas);
+        fallbackCanvas.addComponent(UITransform).setContentSize(720, 1280);
+        if (scene) {
+            fallbackCanvas.setParent(scene);
+        }
+        this.node.setParent(fallbackCanvas);
+        console.warn('[QuickStartLauncher] 场景缺少 Canvas，已自动创建最小 Canvas。');
+    }
     private ensureUiBridge(): void {
         this.bootStatusView = this.getComponent(BootStatusView) ?? this.addComponent(BootStatusView);
         this.bootStatusView.init(this.gameEvents);

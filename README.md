@@ -83,17 +83,20 @@ README.md
 ## 排障清单
 
 1. **点击无响应**
-   - 确认脚本挂在 `Canvas`，运行时存在 `Tile-*` 节点。
-2. **看不到状态/槽位/按钮**
+   - 确认脚本已挂载到任一节点。
+2. **运行后屏幕空白**
+   - 先确认 `QuickStartLauncher` 已挂载。
+   - 现在脚本会自动尝试迁移到 `Canvas`，若场景没有 `Canvas` 会自动创建（可在 Console 看到 `[QuickStartLauncher]` 警告）。
+3. **看不到状态/槽位/按钮**
    - `BootStatusView` 会被启动器自动挂载，若未出现请执行一次 `Assets -> Refresh`。
-3. **下一关报错或无资源**
+4. **下一关报错或无资源**
    - 这是可恢复场景，会自动回退到内置关卡并继续可玩。
 
-4. **导入包含无效文件**
+5. **导入包含无效文件**
    - 本仓库已补充 `project.json` 与 `settings/profiles` 最小工程标识，请确认使用 **Cocos Creator 3.8.2** 打开仓库根目录。
    - 若本地历史缓存导致导入校验失败：先在 Creator 新建一个 3.8.2 空项目，再用本仓库的 `assets/`、`settings/`、`profiles/`、`project.json` 覆盖后重开。
 
-5. **编辑器版本不存在**
+6. **编辑器版本不存在**
    - 若你本机其它 3.8.2 项目可正常导入，本项目仍报错，优先排查 **`project.json` 版本字段格式** 是否被识别。
    - 本仓库已将 `project.json` 改为 Creator 兼容字段：`creator`（字符串版本号）+ `engine` + `version`，请先拉取最新代码再导入。
    - 若仍失败，可将 `project.json` 的 `creator` 与 `version` 临时改为你本机实际安装的小版本号后重试。
