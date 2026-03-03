@@ -64,8 +64,9 @@ README.md
 
 1. 用 Cocos Creator 3.8.2 打开项目。
 2. 确保场景中有 `Canvas`。
-3. 只把 `QuickStartLauncher` 挂到 `Canvas`。
-4. 点击预览：可直接看到牌面文本、槽位、状态文案、`[重开]`、`[下一关]`。
+3. 推荐把 `QuickStartLauncher` 挂到 `Canvas`（最稳妥）。
+4. 即使忘记挂载，运行时也会自动创建启动节点并输出 Console 提示。
+5. 点击预览：可直接看到牌面文本、槽位、状态文案、`[重开]`、`[下一关]`。
 
 ## 玩法说明
 
@@ -85,8 +86,8 @@ README.md
 1. **点击无响应**
    - 确认脚本已挂载到任一节点。
 2. **运行后屏幕空白**
-   - 先确认 `QuickStartLauncher` 已挂载。
-   - 现在脚本会自动尝试迁移到 `Canvas`，若场景没有 `Canvas` 会自动创建（可在 Console 看到 `[QuickStartLauncher]` 警告）。
+   - 现在脚本会在场景启动后自动检查：若没有 `QuickStartLauncher` 实例，会自动创建启动节点。
+   - 若节点不在 `Canvas` 下会自动迁移；若场景没有 `Canvas` 会自动创建（可在 Console 看到 `[QuickStartLauncher]` 警告）。
 3. **看不到状态/槽位/按钮**
    - `BootStatusView` 会被启动器自动挂载，若未出现请执行一次 `Assets -> Refresh`。
 4. **下一关报错或无资源**
@@ -101,6 +102,7 @@ README.md
    - 本仓库已将 `project.json` 改为 Creator 兼容字段：`creator`（字符串版本号）+ `engine` + `version`，请先拉取最新代码再导入。
    - 若仍失败，可将 `project.json` 的 `creator` 与 `version` 临时改为你本机实际安装的小版本号后重试。
 
+7. **ENOENT: open ...\package.json**
 6. **ENOENT: open ...\package.json**
    - 该错误表示仓库根目录缺失 `package.json`，Dashboard 在读取项目版本时会直接失败。
    - 本仓库已补充最小 `package.json`（含 `creator.version`），请拉取最新代码后重新导入。

@@ -1,5 +1,6 @@
 import {
     _decorator,
+    Director,
     Canvas,
     Color,
     Component,
@@ -338,4 +339,37 @@ export class QuickStartLauncher extends Component {
             this.statusLabel.string = message;
         }
     }
+}
+
+
+const AUTO_LAUNCHER_NODE = '__AutoQuickStartLauncher__';
+
+function ensureAutoLauncherMounted(): void {
+    const scene = director.getScene();
+    if (!scene) {
+        return;
+    }
+
+    const existing = scene.getComponentsInChildren(QuickStartLauncher);
+    if (existing.length > 0) {
+        return;
+    }
+
+    const canvasNode = find('Canvas', scene) ?? (() => {
+        const canvas = new Node('Canvas');
+        canvas.addComponent(Canvas);
+        canvas.addComponent(UITransform).setContentSize(720, 1280);
+        canvas.setParent(scene);
+        return canvas;
+    })();
+
+    const launcherNode = new Node(AUTO_LAUNCHER_NODE);
+    launcherNode.setParent(canvasNode);
+    launcherNode.addComponent(QuickStartLauncher);
+    console.warn('[QuickStartLauncher] 未检测到挂载实例，已自动创建启动节点。');
+}
+
+director.on(Director.EVENT_AFTER_SCENE_LAUNCH, ensureAutoLauncherMounted);
+if (director.getScene()) {
+    ensureAutoLauncherMounted();
 }
