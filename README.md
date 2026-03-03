@@ -95,8 +95,8 @@ README.md
 
 5. **编辑器版本不存在**
    - 若你本机其它 3.8.2 项目可正常导入，本项目仍报错，优先排查 **`project.json` 版本字段格式** 是否被识别。
-   - 本仓库已将 `project.json` 补齐为 `creator.version + version`（并保留 `engine`），请先拉取最新代码再导入。
-   - 若仍失败，可将 `project.json` 的 `creator.version` 与 `version` 临时改为你本机实际安装的小版本号后重试。
+   - 本仓库已将 `project.json` 改为 Creator 兼容字段：`creator`（字符串版本号）+ `engine` + `version`，请先拉取最新代码再导入。
+   - 若仍失败，可将 `project.json` 的 `creator` 与 `version` 临时改为你本机实际安装的小版本号后重试。
 
 ## 验收命令
 
