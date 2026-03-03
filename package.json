@@ -1,0 +1,9 @@
+{
+  "name": "meishi-sanxiao-game",
+  "version": "3.8.2",
+  "private": true,
+  "description": "Cocos Creator 3.8.2 minimal playable scaffold",
+  "creator": {
+    "version": "3.8.2"
+  }
+}
