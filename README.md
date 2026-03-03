@@ -98,6 +98,10 @@ README.md
    - 本仓库已将 `project.json` 改为 Creator 兼容字段：`creator`（字符串版本号）+ `engine` + `version`，请先拉取最新代码再导入。
    - 若仍失败，可将 `project.json` 的 `creator` 与 `version` 临时改为你本机实际安装的小版本号后重试。
 
+6. **ENOENT: open ...\package.json**
+   - 该错误表示仓库根目录缺失 `package.json`，Dashboard 在读取项目版本时会直接失败。
+   - 本仓库已补充最小 `package.json`（含 `creator.version`），请拉取最新代码后重新导入。
+
 ## 验收命令
 
 ```bash
