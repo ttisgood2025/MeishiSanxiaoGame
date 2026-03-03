@@ -1,4 +1,4 @@
-# MeishiSanxiaoGame（项目骨架阶段）
+# MeishiSanxiaoGame（项目骨架阶段）我是分支
 
 本仓库当前只完成 **Cocos Creator 3.8.2 项目骨架**，目标是让后续玩法开发可以在稳定结构上迭代。
 
