@@ -1,0 +1,6 @@
+{
+  "id": "level-002",
+  "tiles": [1, 2, 3, 1, 2, 3, 1, 2, 3, 4, 4, 4],
+  "slotCapacity": 7,
+  "description": "下一关：增加第四种牌。"
+}

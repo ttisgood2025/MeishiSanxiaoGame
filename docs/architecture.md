@@ -1,41 +1,41 @@
-# 架构说明（骨架阶段）
+# 架构说明（当前阶段：最小可玩闭环）
 
-## 目标边界
-- 当前阶段只建设启动骨架、目录约定、协作模板。
-- 不实现消除玩法、关卡编辑器、数值系统。
+## 1. 目标边界
 
-## 模块职责
+- 只实现最小可玩链路：点牌、入槽、三消、胜败、重开/下一关。
+- 保持 **单脚本接入**：只挂 `QuickStartLauncher`。
+- UI 与玩法采用 **事件驱动**，避免直接相互耦合。
+- 所有关卡加载必须可 fallback。
 
-## `assets/scripts/core`
-- 放置生命周期入口、流程编排、容错。
-- 当前入口：`QuickStartLauncher`。
+## 2. 模块职责
 
-## `assets/scripts/ui`
-- 放置纯展示层组件。
-- 当前示例：`BootStatusView`（状态文本显示）。
+- `assets/scripts/core/QuickStartLauncher.ts`
+  - 启动入口（`start -> bootstrap`）
+  - 关卡加载与兜底（`loadLevelWithFallback`）
+  - 玩法循环（点牌、入槽、消除、胜败）
+  - 事件总线（发状态、收 UI 指令）
+- `assets/scripts/ui/BootStatusView.ts`
+  - 启动时自动创建状态文本、槽位文本、按钮文本
+  - 订阅玩法事件（状态、剩余牌、槽位、游戏状态）
+  - 发布 UI 事件（重开、下一关）
 
-## `assets/resources`
-- 放置运行时可通过 `resources.load` 加载的资源。
-- `levels/` 下保存示例关卡 JSON。
+## 3. 最小接入步骤
 
-## 启动流程（最小）
-1. Canvas 启动 `QuickStartLauncher.start()`。
-2. 进入 `bootstrap()`。
-3. 调用 `loadLevelWithFallback()`：先尝试 resources，再回退内置关卡。
-4. 输出“骨架就绪”状态，等待下一阶段接入游戏流程。
+1. 打开 Cocos Creator 3.8.2。
+2. 将 `QuickStartLauncher` 挂到 `Canvas`。
+3. 点击预览并按牌面交互。
 
-## 最小接入步骤
-1. 打开项目并进入主场景。
-2. 把 `QuickStartLauncher` 挂到 `Canvas`。
-3. 运行预览，确认 Console 中有 `loaded level` 日志。
+## 4. 排障清单
 
-## 排障
-- 若资源路径错误：检查 `levelPath` 是否与 `assets/resources` 下路径一致（不带扩展名）。
-- 若状态无显示：确认已绑定 `statusLabel`。
-- 若脚本未生效：重新导入资源并检查类名 `QuickStartLauncher`。
+- **没有牌面节点**：确认 `setupBoard()` 被调用，Console 有 `level ready`。
+- **重开/下一关按钮不工作**：确认 `BootStatusView.init(eventBus)` 被调用。
+- **关卡资源异常**：检查 `assets/resources/levels/*.json`；异常时应自动使用 fallback。
 
-## 验收命令
+## 5. 验收命令
+
 ```bash
-find assets/scripts -maxdepth 3 -type f | sort
-rg "QuickStartLauncher|fallback" assets/scripts/core/QuickStartLauncher.ts
+find assets docs .github -maxdepth 4 -type f | sort
+rg "bootstrap\(|loadLevelWithFallback|onTileClicked|onWin|onFail" assets/scripts/core/QuickStartLauncher.ts
+rg "EventTarget|ui:restart|ui:next-level|game:slot-updated|game:state" assets/scripts/ui/BootStatusView.ts
+rg "最小接入步骤|排障清单|验收命令" README.md docs/architecture.md
 ```

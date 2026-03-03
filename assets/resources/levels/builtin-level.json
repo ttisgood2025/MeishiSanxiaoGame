@@ -1,9 +1,6 @@
 {
-  "id": "builtin-fallback",
-  "grid": [
-    [1, 2, 3],
-    [2, 3, 1],
-    [3, 1, 2]
-  ],
-  "goalScore": 300
+  "id": "builtin-level",
+  "tiles": [1, 1, 1, 2, 2, 2, 3, 3, 3],
+  "slotCapacity": 7,
+  "description": "资源失败时的内置兜底关卡。"
 }
